@@ -24,6 +24,5 @@ public class GameManager : MonoBehaviour
             level = Instantiate(levelPrefab);
         }
     }
-
     
 }

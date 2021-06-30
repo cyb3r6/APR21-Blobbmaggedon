@@ -8,6 +8,7 @@ public class Ichablob : MonoBehaviour
     private Animator blobAnimator;
     private Transform target;
     private NavMeshAgent navMeshAgent;
+    private Combat combat;
     
     void Start()
     {
@@ -17,6 +18,9 @@ public class Ichablob : MonoBehaviour
 
         blobAnimator = GetComponent<Animator>();
 
+        combat = GetComponent<Combat>();
+
+        combat.OnAttack += OnAttack;
     }
 
     public void SetPlayer(Transform player)
@@ -29,19 +33,18 @@ public class Ichablob : MonoBehaviour
         navMeshAgent.SetDestination(target.position);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if(other.gameObject.tag == "MainCamera")
         {
-            blobAnimator.SetBool("Attack", true);
+            OnAttack();
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
 
-        if (other.gameObject.tag == "MainCamera")
-        {
-            blobAnimator.SetBool("Attack", false);
-        }
+    public void OnAttack()
+    {
+        blobAnimator.SetTrigger("Attack");
+        combat.Attack(Player.instance.playerstats);
     }
+   
 }
