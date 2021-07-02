@@ -9,6 +9,7 @@ public class Ichablob : MonoBehaviour
     private Transform target;
     private NavMeshAgent navMeshAgent;
     private Combat combat;
+    private Enemy enemy;
     
     void Start()
     {
@@ -21,6 +22,10 @@ public class Ichablob : MonoBehaviour
         combat = GetComponent<Combat>();
 
         combat.OnAttack += OnAttack;
+
+        enemy = GetComponent<Enemy>();
+
+        enemy.stats.OnHealthZero += Death;
     }
 
     public void SetPlayer(Transform player)
@@ -45,6 +50,19 @@ public class Ichablob : MonoBehaviour
     {
         blobAnimator.SetTrigger("Attack");
         combat.Attack(Player.instance.playerstats);
+    }
+
+    public void Death()
+    {
+        blobAnimator.SetTrigger("Death");
+
+        navMeshAgent.isStopped = true;
+
+        var rb = GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        Level.level.SetEnemiesRemaining(Level.level.GetEnemiesRemaining() - 1);
     }
    
 }

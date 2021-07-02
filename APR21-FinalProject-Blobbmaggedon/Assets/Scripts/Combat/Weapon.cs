@@ -8,10 +8,15 @@ public class Weapon : XRGrabInteractable
     public Combat combat;
 
     public int damageModifier = 1;
-    
+
+    public AudioClip weaponHitSound;
+
+    private AudioSource audioSource;
+
     void Start()
     {
         combat = Player.instance.combat;
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void PickUpWeapon()
@@ -29,6 +34,7 @@ public class Weapon : XRGrabInteractable
         if (enemy)
         {
             combat.Attack(enemy.stats, enemy.transform);
+            SoundManager.instance.PlaySound(weaponHitSound, audioSource);
         }
     }
 

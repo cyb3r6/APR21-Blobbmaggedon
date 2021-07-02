@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
+    path: Assets/Scenes/MainMenu.unity
+    guid: 59475c09cec01d142823007d31a06395
+  - enabled: 1
+    path: Assets/Scenes/FantasyTower.unity
+    guid: d7338782674cae445812b7bdf54f03b1
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: db82b6420e614524a8a88c6374759b79, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 974235f27737b554eb8a39be8ce1aeb8, type: 2}

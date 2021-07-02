@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : PlayerInteractable
 {
     public CharacterStats stats;
-    public float deathDelay = 1f;
+    public float deathDelay = 5f;
     
     void Start()
     {

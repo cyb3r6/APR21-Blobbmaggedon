@@ -44,7 +44,16 @@ public class SpawnManager : MonoBehaviour
     {
         if (!roundOver)
         {
+            IsAllDead();
             SpawnEnemies();
+        }
+        else
+        {
+            if(Time.time >= nextRoundTime)
+            {
+                GameObject newSpawner = Instantiate(this.gameObject);
+                Destroy(this.gameObject);
+            }
         }
     }
 
@@ -69,8 +78,18 @@ public class SpawnManager : MonoBehaviour
         enemies = Level.level.GetLevel();
         Level.level.SetEnemiesRemaining(enemies);
     }
-    
-    
+
+    private void IsAllDead()
+    {
+        //Checks if all enemies are dead and begins next round
+        if (Level.level.GetEnemiesRemaining() <= 0)
+        {
+            roundOver = true;
+            nextRoundTime = Time.time + roundDelay;
+            Level.level.SetLevel(Level.level.GetLevel() + 1);
+        }
+    }
+
     private void SpawnEnemies()
     {
         if(enemies> 0)
